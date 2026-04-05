@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { DynamicIcon } from "@/components/DynamicIcon";
+import PrintButton from "@/components/PrintButton";
 import { CheckCircle2, TrendingUp, TrendingDown, Minus } from "lucide-react";
 import {
   type MoodEntry,
@@ -49,11 +50,24 @@ export default function MoodSection() {
       d.setDate(d.getDate() - i);
       const dateStr = d.toISOString().split("T")[0];
       const mood = moodData.find((m) => m.date === dateStr);
+
+      // Obtener el icono y label según el puntaje
+      let icon = "❓";
+      let label = "Sin registro";
+      if (mood?.score) {
+        const config = MOOD_CONFIG.find((m) => m.score === mood.score);
+        if (config) {
+          icon = config.icon;
+          label = config.label;
+        }
+      }
+
       last7.push({
         date: dateStr,
         dayName: d.toLocaleDateString("es-ES", { weekday: "short" }),
         mood: mood?.score || 0,
-        emoji: mood?.emoji || "❓",
+        icon: icon,
+        label: label,
       });
     }
     return last7;
@@ -75,11 +89,15 @@ export default function MoodSection() {
   };
 
   const trend = getTrend();
+  const last7Days = getLast7Days();
 
   return (
     <div className="space-y-6">
+      {/* Sección de check-in diario */}
       <div>
-        <h3 className="font-semibold mb-3">¿Cómo te sientes hoy?</h3>
+        <h3 className="font-semibold text-xl mb-3 mt-5">
+          ¿Cómo te sientes hoy?
+        </h3>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           {MOOD_CONFIG.map((mood) => (
             <Button
@@ -89,7 +107,7 @@ export default function MoodSection() {
               className="flex flex-col items-center gap-2 py-6 h-auto"
             >
               <DynamicIcon name={mood.icon} size={32} className={mood.color} />
-              <span className="text-xs">{mood.label}</span>
+              <span className="text-md">{mood.label}</span>
             </Button>
           ))}
         </div>
@@ -101,36 +119,69 @@ export default function MoodSection() {
         )}
       </div>
 
-      <div>
+      {/* Sección del gráfico con id para imprimir */}
+      <div id="mood-chart-print" className="mood-chart-section">
         <div className="flex justify-between items-center mb-2">
           <h3 className="font-semibold">Últimos 7 días</h3>
-          <Badge variant="outline">Promedio: {getAverageMood()}</Badge>
+          <div className="flex gap-2">
+            <Badge variant="outline" className="mood-average">
+              Promedio: {getAverageMood()}
+            </Badge>
+            <PrintButton
+              targetSelector="#mood-chart-print"
+              title="MindSkin - Reporte de Estado de Ánimo"
+              variant="outline"
+              size="default"
+            />
+          </div>
         </div>
+
         <div className="space-y-2">
-          {getLast7Days().map((day) => (
-            <div key={day.date} className="flex items-center gap-3">
-              <div className="w-12 text-sm font-medium">{day.dayName}</div>
+          {last7Days.map((day) => (
+            <div
+              key={day.date}
+              className="flex items-center gap-3 mood-chart-row"
+            >
+              <div className="w-12 text-sm font-medium mood-day-name">
+                {day.dayName}
+              </div>
               <div className="flex-1 h-8 bg-slate-100 rounded-lg overflow-hidden relative">
                 {day.mood > 0 && (
-                  <div
-                    className={`h-full rounded-lg ${day.mood >= 4 ? "bg-green-500" : day.mood === 3 ? "bg-yellow-500" : "bg-red-500"}`}
-                    style={{ width: `${(day.mood / 5) * 100}%` }}
-                  />
+                  <>
+                    <div
+                      className={`h-full rounded-lg ${
+                        day.mood >= 4
+                          ? "bg-green-500"
+                          : day.mood === 3
+                            ? "bg-yellow-500"
+                            : "bg-red-500"
+                      }`}
+                      style={{ width: `${(day.mood / 5) * 100}%` }}
+                    />
+                    {/* Valor numérico oculto para extracción en impresión */}
+                    <span className="hidden mood-value">{day.mood}</span>
+                    <span className="hidden mood-label">{day.label}</span>
+                  </>
                 )}
-                <div className="absolute inset-0 flex items-center justify-center text-xl">
+                <div className="absolute inset-0 flex items-center justify-center text-xl mood-icon">
                   {day.mood > 0 && (
                     <DynamicIcon
-                      name={day.emoji}
+                      name={day.icon}
                       size={20}
                       className="text-white drop-shadow-sm"
                     />
+                  )}
+                  {day.mood === 0 && (
+                    <span className="text-slate-400 text-sm">—</span>
                   )}
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <div className="mt-4 flex justify-center gap-4 p-3 bg-slate-50 rounded-lg">
+
+        {/* Contenedor de tendencia con clase para impresión */}
+        <div className="mt-4 flex justify-center gap-4 p-3 bg-slate-50 rounded-lg mood-summary mood-trend">
           <span className="text-sm">Tendencia:</span>
           {trend === "up" && (
             <div className="flex items-center gap-1 text-green-600">
@@ -150,6 +201,7 @@ export default function MoodSection() {
         </div>
       </div>
 
+      {/* Aviso de privacidad */}
       <div className="bg-green-50 p-4 rounded-lg text-sm text-green-800">
         <strong>Tus datos son privados:</strong> Se guardan solo en tu
         dispositivo.

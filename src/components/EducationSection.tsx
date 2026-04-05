@@ -136,11 +136,11 @@ export default function EducationSection() {
 
       {/* Medical Disclaimer */}
       <div className="bg-amber-50 border border-amber-200 p-4 rounded-lg">
-        <p className="text-sm text-amber-800">
+        <p className="text-lg text-amber-800">
           <strong>Aviso:</strong> Esta aplicación es una herramienta
           complementaria de educación y bienestar. No reemplaza el consejo
-          médico profesional. Siempre consulta con tu dermatólogo para el
-          tratamiento de condiciones de la piel.
+          médico profesional. Siempre consulta con tu médico para el tratamiento
+          de condiciones de la piel.
         </p>
       </div>
     </div>

@@ -30,8 +30,8 @@ export default function MindSkinApp() {
               onClick={() => setActiveTab(tab.id as any)}
               className={`flex flex-col items-center gap-1 py-3 rounded-md transition-colors ${activeTab === tab.id ? "bg-blue-100 text-blue-700" : "text-slate-600 hover:bg-slate-50"}`}
             >
-              <tab.icon className="w-5 h-5" />
-              <span className="text-xs">{tab.label}</span>
+              <tab.icon className="w-5 h-5 md:w-7 md:h-7" />
+              <span className="text-md md:text-xl">{tab.label}</span>
             </button>
           ))}
         </div>
@@ -44,7 +44,7 @@ export default function MindSkinApp() {
         </div>
       </main>
       <footer className="bg-white border-t border-slate-200 py-4 text-center text-sm text-slate-500">
-        © 2025 MindSkin - Mente Sana, Piel Sana
+        Creative Commons - 2026 - MindSkin - Mente Sana, Piel Sana
       </footer>
     </div>
   );
