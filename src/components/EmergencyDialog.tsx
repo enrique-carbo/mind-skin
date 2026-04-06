@@ -138,21 +138,9 @@ export default function EmergencyDialog() {
                   Hospital Escuela de Salud Mental (Ambrosetti y Rondeau).
                 </span>
               </li>
-              <li className="flex gap-2">
-                <span className="font-bold text-slate-700 min-w-20">
-                  Federal:
-                </span>
-                <span>Hospital Colonia "Dr. Raúl Caminos".</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="font-bold text-slate-700 min-w-20">
-                  Rosario del Tala:
-                </span>
-                <span>Hospital "Dr. Luis A. Ellerman".</span>
-              </li>
               <li className="flex gap-2 mt-2 pt-2 border-t border-slate-100 italic text-slate-500">
                 <span className="font-bold text-slate-700 min-w-20">
-                  General:
+                  Guardias:
                 </span>
                 <span>Cualquier guardia de hospital público 24hs.</span>
               </li>
