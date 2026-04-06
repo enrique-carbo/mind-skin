@@ -66,7 +66,7 @@ export default function EducationSection() {
             </div>
 
             {/* Current Card */}
-            <div className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl border border-blue-100">
+            <div className="bg-linear-to-br from-blue-50 to-white p-6 rounded-xl border border-blue-100">
               {/* En móvil: columna, en md+: fila */}
               <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
                 <div className="text-4xl md:text-5xl">

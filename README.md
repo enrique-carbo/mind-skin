@@ -42,33 +42,35 @@ MindSkin es una aplicación web construida con **Astro 6**, **React 19**, **Tail
 
 ```
 mindskin/
-├── public/              # Archivos estáticos (logo.svg, favicon, etc.)
+├── public/
 ├── src/
-│   ├── assets/          # Imágenes, fuentes (si las hay)
+│   ├── assets/
 │   ├── components/
-│   │   ├── react/       # Componentes React
-│   │   │   ├── ui/      # Componentes base (Button, Card, Badge, Progress)
-│   │   │   ├── utils/   # Helpers (localStorage, sonidos, constantes)
-│   │   │   ├── MindSkinApp.tsx
-│   │   │   ├── Header.tsx
-│   │   │   ├── MeditationSection.tsx
-│   │   │   ├── BreathingSection.tsx
-│   │   │   ├── MoodSection.tsx
-│   │   │   ├── EducationSection.tsx
-│   │   │   ├── StopExercise.tsx
-│   │   │   ├── BodyScan.tsx
-│   │   │   ├── Grounding54321.tsx
-│   │   │   └── DynamicIcon.tsx
-│   │   └── (otros componentes Astro)
+│   │   └── react/
+│   │       ├── ui/
+│   │       ├── utils/
+│   │       ├── MindSkinApp.tsx
+│   │       ├── Header.tsx
+│   │       ├── MeditationSection.tsx
+│   │       ├── BreathingSection.tsx
+│   │       ├── MoodSection.tsx
+│   │       ├── EducationSection.tsx
+│   │       ├── StopExercise.tsx
+│   │       ├── BodyScan.tsx
+│   │       ├── Grounding54321.tsx
+│   │       └── DynamicIcon.tsx
 │   ├── layouts/
-│   │   └── Layout.astro # Layout principal con metadatos y fuentes
+│   │   └── Layout.astro
 │   ├── pages/
-│   │   └── index.astro  # Página principal
+│   │   └── index.astro
 │   └── styles/
-│       └── globals.css  # Tailwind y estilos globales
-├── astro.config.mjs     # Configuración de Astro, fuentes y adapter Cloudflare
-├── tailwind.config.js   # (opcional, con Tailwind 4 se usa CSS en su lugar)
+│       └── globals.css
+├── astro.config.mjs
+├── tailwind.config.js (opcional)
 ├── package.json
+├── pnpm-lock.yaml
+├── tsconfig.json
+├── wrangler.jsonc
 └── README.md
 ```
 

@@ -1,11 +1,13 @@
 // src/components/Header.tsx
-import { Activity } from "lucide-react";
+
+import EmergencyDialog from "@/components/EmergencyDialog";
 
 export default function Header() {
   return (
     <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
+          {/* Logo y Título */}
           <div className="flex items-center gap-3">
             <img src="/logo.svg" alt="MindSkin Logo" className="w-8 h-8" />
             <div>
@@ -17,8 +19,15 @@ export default function Header() {
               </p>
             </div>
           </div>
-          <div className="bg-blue-50 text-blue-700 border border-blue-200 rounded-full px-3 py-1 text-xs flex items-center gap-1">
-            Privado y Local
+
+          {/* Badges y Acciones */}
+          <div className="flex items-center gap-3">
+            <span className="hidden sm:inline-block bg-blue-50 text-blue-700 border border-blue-200 rounded-full px-3 py-1 text-xs font-medium">
+              Privado y Local
+            </span>
+
+            {/* Componente extraído */}
+            <EmergencyDialog />
           </div>
         </div>
       </div>
